@@ -1,0 +1,7 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.jokes-container {
+  border-bottom: 2px solid black;
+}
