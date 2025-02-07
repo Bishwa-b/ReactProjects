@@ -1,4 +1,5 @@
 import React from 'react';
+import DarkMode from './components/DarkMode'
 import padsData from './pads';
 
 export default function App(props) {
@@ -14,29 +15,28 @@ export default function App(props) {
 
   const [pad, setPad] = React.useState(padsData);
   const [mode, setMode] = React.useState(props.darkMode);
-  const modeIcon = mode
-    ? 'src/assets/light-mode.png'
-    : 'src/assets/night-mode.png';
-
-  const altMsg = mode ? 'light Mode' : 'Dark Mode';
+  
   const styles = { backgroundColor: mode ? 'rgb(60,60,60)' : 'white' };
+
+
   function handleClick() {
     setMode((prevMode) => !prevMode);
   }
 
+  const modeSwitch = (<DarkMode isSwitch={mode} toggle={handleClick}/>)
+
   function ButtonStyle(entry) {
     return { backgroundColor: entry % 2 ? '#222222' : '#CCCCCC' };
   }
+
   const padArray = pad.map((entries) => (
     <button key={entries.id} style={ButtonStyle(entries.id)}></button>
   ));
 
   return (
-    <main style={styles}>
-      <button className="bgButton" onClick={handleClick}>
-        <img src={modeIcon} alt={altMsg} className="modes" />
-      </button>
-      <div className="pad-container">{padArray}</div>
-    </main>
+          <main style={styles}>
+            {modeSwitch}
+            <div className="pad-container">{padArray}</div>
+          </main>
   );
 }
